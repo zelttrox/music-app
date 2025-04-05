@@ -1,14 +1,22 @@
-const express = require('express');
-const ejs = require('ejs');
+// Imports
+const express = require("express")
+const ejs = require("ejs")
 
-const server = express();
+// Define variables
+const server = express()
+const port = 3030
 
-server.set('view engine', 'ejs')
+// Define routes
+const songs_router = require("./routes/songs")
 
-server.get('/', function (request, response) {
-    response.render('index')
-});
+server.set("view engine", "ejs")
 
-server.listen(3030, function () {
-    console.log('Server started on port 3030');
-});
+server.get("/", function (request, response) {
+    response.render("index")
+})
+
+server.use("/songs", songs_router)
+
+server.listen(port, function () {
+    console.log("Server started on port", port)
+})
