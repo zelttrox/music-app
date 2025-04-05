@@ -1,6 +1,8 @@
+// Imports
 const express = require("express")
 const router = express.Router()
 
+// Define Song class
 class Song {
     constructor(name, artist, path) {
         this.name = name
@@ -11,19 +13,23 @@ class Song {
     }
 }
 
+// Songs array
+// TODO: Replace this with an actual database
 var songs = [
     new Song("Nostalgia", "Suki_Waterhouse", "./music/Nostalgia.mp3")
 ]
 
+// /songs handler
 router.get("/", function (request, response) {
     response.send("Songs")
 })
 
+// Specific songs routes handler
+// TODO: Use database requests instead of array
 router.route("/:id").get( function(request, response) {
     console.log(request.song)
     response.send(`Song: ${request.song.name} by ${request.song.artist}`)
 })
-
 router.param("id", function (request, response, next, id) {
     var target = songs.find(function(song) {return song.id == id})
     if (target) {
@@ -35,4 +41,5 @@ router.param("id", function (request, response, next, id) {
     }
 })
 
+// Exports
 module.exports = router
