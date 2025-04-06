@@ -3,11 +3,11 @@ const mysql = require("mysql2");
 
 // Setup connection with root user
 const database = mysql.createConnection({
-    host: "localhost",
+    host: "db",
     user: "root",
     password: "duh",
     database: "database",
-    port: 3232,
+    port: 3306,
 });
 
 // Attempt connection to the database
@@ -28,6 +28,6 @@ function Disconnect() {
 
 // Exports
 module.exports = {
-    ConnectDatabase: Connect,
-    DisconnectDatabase: Disconnect,
+    Connect,
+    Disconnect,
 }

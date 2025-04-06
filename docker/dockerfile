@@ -14,4 +14,4 @@ COPY . .
 
 # Launch the app on port 3030
 EXPOSE 3030
-CMD ["node", "app.js"]
+CMD ["node", "app.js", "--watch"]
