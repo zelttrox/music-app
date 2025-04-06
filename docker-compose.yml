@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      dockerfile: docker/dockerfile
+    container_name: music-app
+    ports:
+      - "3030:3030"
+    networks:
+      - net
+    
+networks:
+  net:
+    driver: bridge
