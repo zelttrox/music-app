@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     build:
-      dockerfile: docker/dockerfile
+      dockerfile: dockerfile
     container_name: music-app
     ports:
       - "3030:3030"
