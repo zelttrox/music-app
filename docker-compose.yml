@@ -9,6 +9,17 @@ services:
       - "3030:3030"
     networks:
       - net
+
+  db:
+    image: mysql:8.0
+    container_name: database
+    environment:
+      - MYSQL_ROOT_PASSWORD=duh
+      - MYSQL_DATABASE=database
+    ports:
+      - "3232:3232"
+    networks:
+      - net
     
 networks:
   net:
