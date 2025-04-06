@@ -11,7 +11,6 @@ const port = 3030
 
 // Define routes
 const songs_router = require("./routes/songs")
-const ConnectDatabase = require("./database/exec")
 
 // Set the render engine
 server.set("view engine", "ejs")
@@ -27,6 +26,7 @@ server.use("/browse", songs_router)
 
 // Try to connect to the database
 database.Connect()
+database.Init()
 
 // Start listening for connections
 server.listen(port, function () {

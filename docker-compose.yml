@@ -15,10 +15,10 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: database
+    container_name: music_db
     environment:
       - MYSQL_ROOT_PASSWORD=duh
-      - MYSQL_DATABASE=database
+      - MYSQL_DATABASE=music_db
     ports:
       - "3232:3306"
     networks:

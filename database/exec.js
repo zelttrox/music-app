@@ -1,12 +1,14 @@
 // Imports
 const mysql = require("mysql2");
+const fs = require("fs")
+const path = require("path")
 
 // Setup connection with root user
 const database = mysql.createConnection({
     host: "db",
     user: "root",
     password: "duh",
-    database: "database",
+    database: "music_db",
     port: 3306,
 });
 
@@ -16,18 +18,33 @@ function Connect() {
         console.log("[DB] Attempting to connect to the database..")
         if (err != null) {
             console.error("[DB] Error connecting to the database: ", err)
-            return
+            return true
         }
         console.log("[DB] Successfully connected to the database!")
     })
 }
 
 function Disconnect() {
+    database.end()
+}
 
+function Init() {
+    var file_path = path.join(__dirname, "init.sql")
+    var sql_script = fs.readFileSync(file_path, "utf-8")
+    database.query(sql_script, function(err, output) {
+        if (err != null) {
+            console.log("[DB] Error while initializing database: ", err)
+            return
+        } 
+        else {
+            console.log("[DB] Successfully initialized the database!")
+        }
+    })
 }
 
 // Exports
 module.exports = {
     Connect,
     Disconnect,
+    Init,
 }
