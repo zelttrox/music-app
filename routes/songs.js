@@ -16,12 +16,13 @@ class Song {
 // Songs array
 // TODO: Replace this with an actual database
 var songs = [
-    new Song("Nostalgia", "Suki_Waterhouse", "./music/Nostalgia.mp3")
+    new Song("Nostalgia", "Suki_Waterhouse", "./music/Nostalgia.mp3"),
+    new Song("Spiracle", "Flower_Face", "./"),
 ]
 
 // /songs handler
 router.get("/", function (request, response) {
-    response.send("Songs")
+    response.render("browse", {songs: songs})
 })
 
 // Specific songs routes handler
@@ -34,8 +35,7 @@ router.param("id", function (request, response, next, id) {
     var target = songs.find(function(song) {return song.id == id})
     if (target) {
         request.song = target
-        next()
-    }
+        next()    }
     else {
         response.send("Could not find song for ID")
     }

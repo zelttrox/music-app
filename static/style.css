@@ -1,13 +1,16 @@
-/* CSS Variables for easy color customization */
+/* VARIABLES */
 :root {
     --background-color: rgb(22, 22, 22);
     --navbar-color: rgb(34, 34, 34);
-    --navbar-text-color: white;
+    --navbar-text-color: rgb(255, 255, 255);
     --navbar-hover-color: rgb(50, 50, 50);
     --footer-color: rgb(34, 34, 34);
     --footer-text-color: white;
+    --accent-color: rgb(185, 123, 255);
 }
 
+
+/* PAGE */
 body {
     background-color: var(--background-color);
     color: white;
@@ -16,41 +19,6 @@ body {
     padding: 0;
 }
 
-/* Navbar styles */
-.navbar {
-    background-color: var(--navbar-color);
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-}
-
-.navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 2rem;
-}
-
-.navbar li {
-    display: inline;
-}
-
-.navbar a {
-    text-decoration: none;
-    color: var(--navbar-text-color);
-    font-weight: bold;
-    transition: color 0.3s, background-color 0.3s;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-}
-
-.navbar a:hover {
-    background-color: var(--navbar-hover-color);
-    color: white;
-}
-
-/* Footer styles */
 footer {
     background-color: var(--footer-color);
     color: var(--footer-text-color);
@@ -59,4 +27,69 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.link {
+    text-decoration: none;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+.link:hover {
+    text-decoration: underline;
+}
+
+
+/* MENU */
+.navbar {
+    background-color: var(--navbar-color);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+}
+.navbar li {
+    display: inline;
+}
+.navbar a {
+    text-decoration: none;
+    color: var(--navbar-text-color);
+    font-weight: bold;
+    transition: 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+.navbar a:hover {
+    background-color: var(--navbar-hover-color);
+    color: var(--accent-color);
+}
+
+
+/* BROWSE PAGE */
+.songs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #43275e5e;
+}
+  
+.song-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.song-text {
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
 }

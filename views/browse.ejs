@@ -20,7 +20,17 @@
   </header>
 
   <main>
-    <h1>Welcome to the Music App</h1>
+    <h1>Browse page </h1>
+    <div class="songs-container"> 
+
+      <% songs.forEach(function(song) { %>
+      <div clas="song-item">
+        <p class="song-text"> <%= song.name %> </p>
+        <p class="song-text"> By <%= song.artist %> </p>
+      </div>
+      <% }) %>
+
+    </div>
   </main>
 
   <footer>

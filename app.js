@@ -19,7 +19,7 @@ server.get("/", function (request, response) {
 
 // Define static folder and routes
 server.use(express.static("static"))
-server.use("/songs", songs_router)
+server.use("/browse", songs_router)
 
 // Start listening for connections
 server.listen(port, function () {
