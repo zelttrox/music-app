@@ -4,6 +4,7 @@ const ejs = require("ejs")
 
 // Import scripts
 const database = require("./database/exec")
+const dbctl = require("./database/controller")
 
 // Define variables
 const server = express()
@@ -27,6 +28,11 @@ server.use("/browse", browse_router)
 // Try to connect to the database
 database.Connect()
 database.Init()
+
+dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
+dbctl.GetSongs()
+
+// dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./music/Nostalgia.mp3")
 
 // Start listening for connections
 server.listen(port, function () {
