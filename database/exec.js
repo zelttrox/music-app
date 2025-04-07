@@ -42,9 +42,20 @@ function Init() {
     })
 }
 
+function Exec(query, ...args) {
+    database.query(query, args, (err, output) => {
+        if (err != nil) {
+            console.log("[DB] Error while executing database with query: ", query)
+            console.log("DB Error: ", err)
+        }
+        console.log("[DB] Query executed successfully: ", output)
+    })
+}
+
 // Exports
 module.exports = {
     Connect,
     Disconnect,
     Init,
+    Exec,
 }

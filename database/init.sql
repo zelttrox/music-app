@@ -1,2 +1,6 @@
--- TODO: FIX CREATE TABLE NOT WORKING FOR SOME REASON ??
-create table oui (id int);
+CREATE TABLE IF NOT EXISTS songs (
+    id INTEGER PRIMARY KEY NOT NULL, 
+    name VARCHAR(50) NOT NULL,
+    artist VARCHAR(50) NOT NULL,
+    music BLOB NOT NULL
+);

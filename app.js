@@ -10,7 +10,7 @@ const server = express()
 const port = 3030
 
 // Define routes
-const songs_router = require("./routes/songs")
+const browse_router = require("./routes/browse")
 
 // Set the render engine
 server.set("view engine", "ejs")
@@ -22,7 +22,7 @@ server.get("/", function (request, response) {
 
 // Define static folder and routes
 server.use(express.static("static"))
-server.use("/browse", songs_router)
+server.use("/browse", browse_router)
 
 // Try to connect to the database
 database.Connect()
