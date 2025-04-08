@@ -29,8 +29,8 @@ server.use("/browse", browse_router)
 database.Connect()
 database.Init()
 
-dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
-dbctl.GetSongs()
+//dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
+console.log("GETSONGS: ", dbctl.GetSongs())
 
 // dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./music/Nostalgia.mp3")
 

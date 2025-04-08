@@ -43,14 +43,25 @@ function Init() {
 }
 
 function Query(query, ...args) {
-    return database.query(query, args, (err, output) => {
+    database.query(query, args, (err) => {
         if (err != null) {
             console.log("[DB] Error while executing database with query: ", query)
             console.log("DB Error: ", err)
         }
-        console.log("[DB] Query executed successfully: ", output)
+        // console.log("[DB] Query executed successfully: ", output)
     })
 }
+
+function GetQuery(query, ...args) {
+    database.query(query, args, (err, output) => {
+        if (err != null) {
+            console.log("[DB] Error while executing database with query: ", query)
+            console.log("DB Error: ", err)
+        }
+        return output
+    })
+}
+
 
 // Exports
 module.exports = {
@@ -58,4 +69,5 @@ module.exports = {
     Disconnect,
     Init,
     Query,
+    GetQuery,
 }

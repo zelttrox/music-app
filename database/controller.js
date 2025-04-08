@@ -10,13 +10,9 @@ function AddSong(name, artist, track) {
 
 function GetSongs() {
     var query = "SELECT * FROM songs"
-    database.Query(query), (err, result) => {
-        if (err != null) {
-            console.log("[DB] Error: while getting songs: ", err)
-        }
+    var result = database.GetQuery(query)
         var songs = result
         return songs
-    }
 }
 
 module.exports = {
