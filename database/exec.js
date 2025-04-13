@@ -53,15 +53,13 @@ function Query(query, ...args) {
 }
 
 function GetQuery(query, ...args) {
-    database.query(query, args, (err, output) => {
-        if (err != null) {
-            console.log("[DB] Error while executing database with query: ", query)
-            console.log("DB Error: ", err)
-        }
-        return output
+    return new Promise((resolve, reject) => {
+        database.query(query, args, (err, output) => {
+            if (err == null) {resolve(output)} 
+            else {reject("[DB] ", err)}
+        })
     })
 }
-
 
 // Exports
 module.exports = {

@@ -8,9 +8,9 @@ function AddSong(name, artist, track) {
     database.Query(query, id, name, artist, track)
 }
 
-function GetSongs() {
+async function GetSongs() {
     var query = "SELECT * FROM songs"
-    var result = database.GetQuery(query)
+    var result = await database.GetQuery(query)
         var songs = result
         return songs
 }
