@@ -29,6 +29,7 @@ server.use("/browse", browse_router)
 database.Connect()
 database.Init()
 
+dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
 dbctl.AddSong("Heather", "Conan Gray", "./uploads/Heather.mp3")
 
 async function LogSongs() {
@@ -36,8 +37,6 @@ async function LogSongs() {
 }
 
 LogSongs()
-
-// dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./music/Nostalgia.mp3")
 
 // Start listening for connections
 server.listen(port, function () {
