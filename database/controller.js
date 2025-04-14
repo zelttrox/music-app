@@ -1,5 +1,4 @@
 // Import scripts
-const { resolveInclude } = require("ejs")
 const database = require("../database/exec")
 
 function AddSong(name, artist, track) {

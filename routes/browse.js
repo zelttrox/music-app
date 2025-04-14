@@ -1,9 +1,25 @@
-// Imports
+// Import scripts
+const dbctl = require("../database/controller")
+
+// Import modules
 const express = require("express")
 const router = express.Router()
 
+const songs = null
+
+async function RetrieveSongs() {
+    try {
+        songs = await dbctl.GetSongs()
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+RetrieveSongs()
+
 // /songs handler
-router.get("/", function (request, response) {
+router.get("/", async function (request, response) {
     response.render("browse", {songs: songs})
 })
 
@@ -17,7 +33,7 @@ router.param("id", function (request, response, next, id) {
     var target = songs.find(function(song) {return song.id == id})
      if (target) {
          request.song = target
-         next()    }
+         next() }
      else {
          response.send("Could not find song for Route: ", id)
      }

@@ -29,8 +29,8 @@ server.use("/browse", browse_router)
 database.Connect()
 database.Init()
 
-dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
-dbctl.AddSong("Heather", "Conan Gray", "./uploads/Heather.mp3")
+// dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
+// dbctl.AddSong("Heather", "Conan Gray", "./uploads/Heather.mp3")
 
 async function LogSongs() {
    console.log("GETSONGS: ", await dbctl.GetSongs()) 
