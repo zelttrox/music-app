@@ -23,9 +23,6 @@ function InitDatabase() {
 
     AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
     AddSong("Heather", "Conan Gray", "./uploads/Heather.mp3")
-    
-    // songs = JSON.parse(GetSongs())
-    console.log(GetSongs())
 }
 
 module.exports = {

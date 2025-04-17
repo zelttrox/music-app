@@ -26,8 +26,10 @@ server.use(express.static("static"))
 server.use("/browse", browse_router)
 
 // Database init
-db.InitDatabase()
-// console.log("Songs: ", db.songs)
+db.InitDatabase().then(async () => {
+    db.songs = await db.GetSongs()
+    console.log("SONGS: ", db.songs)
+})
 
 // Start listening for connections
 server.listen(port, function () {
