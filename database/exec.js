@@ -59,7 +59,9 @@ function GetQuery(query) {
             console.log("[DB] Error while get querying database with query: ", query)
             console.log(["DB: ", err])
         }
-        else return output
+        else {
+            return output
+        }
     })
 }
 

@@ -9,6 +9,28 @@ function AddSong(name, artist, track) {
     database.Query(query, id, name, artist, track)
 }
 
+function GetSongs() {
+    query = "SELECT * FROM songs"
+    output = database.GetQuery(query)
+    return output
+}
+
+var songs
+
+function InitDatabase() {
+    database.Connect()
+    database.Init()
+
+    AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
+    AddSong("Heather", "Conan Gray", "./uploads/Heather.mp3")
+    
+    // songs = JSON.parse(GetSongs())
+    console.log(GetSongs())
+}
+
 module.exports = {
-    AddSong
+    AddSong,
+    GetSongs,
+    InitDatabase,
+    songs
 }

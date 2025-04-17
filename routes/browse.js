@@ -5,26 +5,15 @@ const dbctl = require("../database/controller")
 const express = require("express")
 const router = express.Router()
 
-const songs = null
-
-async function RetrieveSongs() {
-    try {
-        songs = await dbctl.GetSongs()
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
-
 // /songs handler
-router.get("/", async function (request, response) {
+router.get("/", function (request, response) {
     response.render("browse", {songs: songs})
 })
 
 // Specific songs routes handler
 // TODO: Use database requests instead of array
 router.route("/:id").get( function(request, response) {
-    console.log(request.song)
+    // console.log(request.song)
     response.send(`Song: ${request.song.name} by ${request.song.artist}`)
 })
 router.param("id", function (request, response, next, id) {

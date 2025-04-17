@@ -3,8 +3,8 @@ const express = require("express")
 const ejs = require("ejs")
 
 // Import scripts
-const database = require("./database/exec")
-const dbctl = require("./database/controller")
+const db = require("./database/controller")
+
 
 // Define variables
 const server = express()
@@ -25,14 +25,9 @@ server.get("/", function (request, response) {
 server.use(express.static("static"))
 server.use("/browse", browse_router)
 
-// Try to connect to the database
-database.Connect()
-database.Init()
-
-dbctl.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
-dbctl.AddSong("Heather", "Conan Gray", "./uploads/Heather.mp3")
-
-database.GetQuery("SELECT * FROM songs")
+// Database init
+db.InitDatabase()
+// console.log("Songs: ", db.songs)
 
 // Start listening for connections
 server.listen(port, function () {
