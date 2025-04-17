@@ -16,8 +16,6 @@ async function RetrieveSongs() {
     }
 }
 
-RetrieveSongs()
-
 // /songs handler
 router.get("/", async function (request, response) {
     response.render("browse", {songs: songs})

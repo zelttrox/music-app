@@ -18,14 +18,16 @@ function Connect() {
         console.log("[DB] Attempting to connect to the database..")
         if (err != null) {
             console.error("[DB] Error connecting to the database: ", err)
-            return true
-        }
+        } 
+        else {
         console.log("[DB] Successfully connected to the database!")
+        }
     })
 }
 
 function Disconnect() {
     database.end()
+    console.log("[DB] Successfully disconnected database!")
 }
 
 function Init() {
@@ -46,18 +48,18 @@ function Query(query, ...args) {
     database.query(query, args, (err) => {
         if (err != null) {
             console.log("[DB] Error while executing database with query: ", query)
-            console.log("DB Error: ", err)
+            console.log("[DB] ", err)
         }
-        // console.log("[DB] Query executed successfully: ", output)
     })
 }
 
-function GetQuery(query, ...args) {
-    return new Promise((resolve, reject) => {
-        database.query(query, args, (err, output) => {
-            if (err == null) {resolve(output)} 
-            else {reject("[DB] ", err)}
-        })
+function GetQuery(query) {
+    database.query(query, (err, output) => {
+        if (err != null) {
+            console.log("[DB] Error while get querying database with query: ", query)
+            console.log(["DB: ", err])
+        }
+        else return output
     })
 }
 
