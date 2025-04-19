@@ -18,9 +18,9 @@ function Connect() {
         console.log("[DB] Attempting to connect to the database..")
         if (err != null) {
             console.error("[DB] Error connecting to the database: ", err)
-        } 
+        }
         else {
-        console.log("[DB] Successfully connected to the database!")
+            console.log("[DB] Successfully connected to the database!")
         }
     })
 }
@@ -33,11 +33,11 @@ function Disconnect() {
 function Init() {
     var file_path = path.join(__dirname, "init.sql")
     var sql_script = fs.readFileSync(file_path, "utf-8")
-    database.query(sql_script, function(err, output) {
+    database.query(sql_script, function (err, output) {
         if (err != null) {
             console.log("[DB] Error while initializing database: ", err)
             return
-        } 
+        }
         else {
             console.log("[DB] Successfully initialized the database!")
         }
