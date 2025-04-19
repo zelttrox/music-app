@@ -4,6 +4,7 @@ const ejs = require("ejs")
 
 // Import scripts
 const database = require("./database/controller")
+const stash = require("./database/stash")
 
 console.log("[Server]", "Starting server setup..")
 
@@ -28,8 +29,6 @@ server.use(express.static("static"))
 console.log("[Server]", "Static directory has been setup")
 server.use("/browse", browse_router)
 console.log("[Server]", "Using /browse route")
-
-var data
 
 async function InitDatabase() {
     await database.Setup()

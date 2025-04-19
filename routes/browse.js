@@ -11,9 +11,7 @@ router.get("/", function (request, response) {
 })
 
 // Specific songs routes handler
-// TODO: Use database requests instead of array
 router.route("/:id").get( function(request, response) {
-    // console.log(request.song)
     response.send(`Song: ${request.song.name} by ${request.song.artist}`)
 })
 router.param("id", function (request, response, next, id) {
