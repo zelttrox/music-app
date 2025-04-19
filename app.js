@@ -3,8 +3,8 @@ const express = require("express")
 const ejs = require("ejs")
 
 // Import scripts
-const db = require("./database/controller")
-
+const database = require("./database/exec")
+const controller = require("./database/controller")
 
 // Define variables
 const server = express()
@@ -29,6 +29,22 @@ server.use(express.static("static"))
 console.log("[Server]", "Static directory has been setup")
 server.use("/browse", browse_router)
 console.log("[Server]", "Using /browse route")
+
+async function SetupDatabase() {
+    console.log("[DB] Attemtping to setup database..")
+    try {
+        await database.Connect()
+        await database.Init()
+        await controller.AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
+
+        const data = await database.GetQuery("SELECT * FROM songs");
+        console.log("SONGS:", data);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+SetupDatabase();
 
 // Start listening for connections
 server.listen(port, function () {
