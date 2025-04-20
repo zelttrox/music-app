@@ -13,6 +13,8 @@ return new Promise((reslove, reject) => {
 
 }
 
+var songs
+
 async function GetSongs() {
     console.log("[DB] Attempting to get songs from database..")
     try {
@@ -41,4 +43,5 @@ async function Setup() {
 module.exports = {
     Setup,
     GetSongs,
+    songs,
 }

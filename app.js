@@ -4,7 +4,6 @@ const ejs = require("ejs")
 
 // Import scripts
 const database = require("./database/controller")
-const stash = require("./database/stash")
 
 console.log("[Server]", "Starting server setup..")
 
@@ -32,13 +31,14 @@ console.log("[Server]", "Using /browse route")
 
 async function InitDatabase() {
     await database.Setup()
-    data = await database.GetSongs()
+    database.songs = await database.GetSongs()
 }
 
 InitDatabase()
 
 setInterval(() => {
-    console.log("[DB] Data:", data)
+    console.log("[DB] Data:", database.songs)
+    console.log("[DB] Specific data:", database.songs[0].name)
 }, 2000);
 
 // Start listening for connections
