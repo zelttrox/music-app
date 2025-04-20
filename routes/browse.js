@@ -6,7 +6,6 @@ const express = require("express")
 const router = express.Router()
 
 
-
 router.param("id", function (request, response, next, id) {
     const songs = database.songs
     if (!songs) return response.send("Sngs database not available")
@@ -15,7 +14,8 @@ router.param("id", function (request, response, next, id) {
 })
 
 router.get("/", function (request, response) {
-    response.render("browse")
+    const songs = database.songs
+    response.render("browse", {songs: songs})
 })
 
 router.route("/:id").get( function(request, response) {
