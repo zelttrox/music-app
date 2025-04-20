@@ -2,5 +2,5 @@ CREATE TABLE IF NOT EXISTS songs (
     id VARCHAR(100) NOT NULL, 
     name VARCHAR(50) NOT NULL,
     artist VARCHAR(50) NOT NULL,
-    track VARCHAR(30) NOT NULL
+    track VARCHAR(80) NOT NULL
 );

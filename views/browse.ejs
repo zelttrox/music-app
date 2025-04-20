@@ -27,6 +27,9 @@
       <div clas="song-item">
         <p class="song-text"> <%= song.name %> </p>
         <p class="song-text"> By <%= song.artist %> </p>
+        <audio controls>
+          <source src="<%= song.track %>" type="audio/mpeg">
+        </audio>
       </div>
       <% }) %>
 

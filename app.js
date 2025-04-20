@@ -25,6 +25,7 @@ server.get("/", function (request, response) {
 
 // Define static folder and routes
 server.use(express.static("static"))
+server.use(express.static("uploads"))
 console.log("[Server]", "Static directory has been setup")
 server.use("/browse", browse_router)
 console.log("[Server]", "Using /browse route")
@@ -35,11 +36,6 @@ async function InitDatabase() {
 }
 
 InitDatabase()
-
-setInterval(() => {
-    console.log("[DB] Data:", database.songs)
-    console.log("[DB] Specific data:", database.songs[0].name)
-}, 2000);
 
 // Start listening for connections
 server.listen(port, function () {

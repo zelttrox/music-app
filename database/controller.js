@@ -2,13 +2,13 @@
 const database = require("../database/exec")
 
 async function AddSong(name, artist, track) {
-return new Promise((reslove, reject) => {
+return new Promise((resolve, reject) => {
     var query = "INSERT INTO songs (id, name, artist, track) VALUES (?, ?, ?, ?)"
     var id = (`${name}-${artist}`).toLowerCase()
     id = id.replace(" ", "-")
     console.log("[DB] Adding song", id, "to the database..")
     database.Query(query, id, name, artist, track)
-    reslove()
+    resolve()
     })
 
 }
@@ -33,7 +33,9 @@ async function Setup() {
         await database.Init()
 
         await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
-    } 
+        await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
+        await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
+    }
     catch (err) {
         console.error("[DB] Error:", err);
         await database.Disconnect()
