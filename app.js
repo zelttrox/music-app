@@ -16,7 +16,7 @@ const browse_router = require("./routes/browse")
 
 // Set the render engine
 server.set("view engine", "ejs")
-console.log("[Server]", "EJS has been setup as view engine")
+console.log("[Server]", "EJS has been set as view engine")
 
 // Root handler
 server.get("/", function (request, response) {
