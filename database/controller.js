@@ -7,13 +7,14 @@ async function Setup() {
     console.log("[DB Controller] Attemtping to setup database..")
     try {
         await database.Connect()
-        await database.Init()
+        await database.Init("users.sql")
+        await database.Init("songs.sql")
 
         await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
         await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
         await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
 
-        // await AddUser("enzoo", "Linux1234!")
+        await AddUser("enzoo", "Linux1234!")
     }
     catch (err) {
         console.error("[DB Controller] Error:", err);
@@ -28,8 +29,12 @@ async function Setup() {
 // TODO: Email verificationw
 async function AddUser(username, password) {
 return new Promise((resolve, reject) => {
-    if (auth.IsUsernameValid(username) && auth.IsPasswordValid(password) && UserExists(username)) {
+    if (auth.IsUsernameValid(username) && auth.IsPasswordValid(password)) {
         console.log("[DB Controller] User", username, "is valid, adding to database..")
+        const query = "INSERT INTO users (id, username, password, role) VALUES (?, ?, ?, ?)"
+        const id = auth.GenerateID(username, 'user')
+        console.log("[DB Controller]", username, "id: ", `(${id})`)
+        database.Query(query, id, username, password, 'user')
         resolve()
     }
     else {
@@ -39,7 +44,7 @@ return new Promise((resolve, reject) => {
 })}
 
 async function UserExists(username) {
-    const user = await database.GetQuery("SELECT * FROM users WHERE username = ?", [username])
+    const user = await database.GetQuery("SELECT * FROM users WHERE username = ?", username)
     return (user != null) ? true : false
 }
 // <=============================================>

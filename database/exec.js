@@ -41,17 +41,17 @@ return new Promise((resolve, reject) => {
 })}
 
 // Initialize database using SQL instructions
-function Init() {
+function Init(table) {
 return new Promise((resolve, reject) => {
-var file_path = path.join(__dirname, "init.sql")
+var file_path = path.join(__dirname, table)
     var sql_script = fs.readFileSync(file_path, "utf-8")
     database.query(sql_script, function (err, output) {
         if (err != null) {
-            console.log("[DB] Error while initializing database: ", err)
+            console.log("[DB] Error while initializing table:", `(${table})`, err)
             reject()
         }
         else {
-            console.log("[DB] Successfully initialized the database!")
+            console.log("[DB] Successfully initialized table:", `(${table})`)
             resolve()
         }
     })
