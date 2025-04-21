@@ -17,8 +17,6 @@ function GenerateID(username, role) {
     // u-en-102982876387261
 }
 
-
-
 module.exports = {
     IsUsernameValid,
     IsPasswordValid,

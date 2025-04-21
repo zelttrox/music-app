@@ -22,6 +22,7 @@ async function Setup() {
     }
 }
 
+
 // USER CONTROLLER
 // <=============================================>
 // Add a user to the database
@@ -78,6 +79,7 @@ async function GetSongs() {
 }
 // <=============================================>
 
+    
 module.exports = {
     Setup,
     GetSongs,
