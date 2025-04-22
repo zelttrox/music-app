@@ -13,6 +13,8 @@ const port = 3030
 
 // Define routes
 const browse_router = require("./routes/browse")
+const login_router = require("./routes/login")
+const register_router = require("./routes/register")
 
 // Set the render engine
 server.set("view engine", "ejs")
@@ -29,6 +31,10 @@ server.use(express.static("uploads"))
 console.log("[Server]", "Static directory has been setup")
 server.use("/browse", browse_router)
 console.log("[Server]", "Using /browse route")
+server.use("/login", login_router)
+console.log("[Server]", "Using /login route")
+server.use("/register", register_router)
+console.log("[Server]", "Using /register route")
 
 async function InitDatabase() {
     await database.Setup()
