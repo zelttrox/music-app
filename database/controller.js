@@ -95,4 +95,5 @@ module.exports = {
     Setup,
     GetSongs,
     songs,
+    AddUser
 }

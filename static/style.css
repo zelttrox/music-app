@@ -1,12 +1,14 @@
 /* VARIABLES */
 :root {
     --background-color: rgb(22, 22, 22);
+    --container-color: rgb(34, 34, 34);
     --navbar-color: rgb(34, 34, 34);
     --navbar-text-color: rgb(255, 255, 255);
     --navbar-hover-color: rgb(50, 50, 50);
     --footer-color: rgb(34, 34, 34);
     --footer-text-color: white;
     --accent-color: rgb(185, 123, 255);
+    --accent-color-hover: rgb(174, 104, 255);
 }
 
 
@@ -109,3 +111,65 @@ footer {
     color: white;
     font-weight: 700;
 }
+
+/* REGISTER/LOGIN */
+.auth-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--container-color);
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .btn-primary {
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--accent-color-hover);
+  }
+  
+  .auth-link {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .auth-link a {
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+  
+  .auth-link a:hover {
+    text-decoration: underline;
+  }
