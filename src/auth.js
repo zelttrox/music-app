@@ -1,10 +1,12 @@
 function IsUsernameValid(username) {
     const regex = /^[a-zA-Z0-9_]+$/
+    console.log("[Auth] Valid username:", regex.test(username))
     return (regex.test(username) && username.length <= 16) ? true : false
 }
 
 function IsPasswordValid(password) {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
+    console.log("[Auth] Valid password:", regex.test(password))
     return (regex.test(password) && password.length <= 64 && password.length >= 6) ? true : false
 }
 

@@ -29,14 +29,19 @@ async function Setup() {
 // TODO: Also ask for email
 // TODO: Email verificationw
 async function AddUser(username, password) {
+    const user_exists = await UserExists(username)
 return new Promise((resolve, reject) => {
-    if (auth.IsUsernameValid(username) && auth.IsPasswordValid(password)) {
+    if (auth.IsUsernameValid(username) && auth.IsPasswordValid(password) && user_exists == false) {
         console.log("[DB Controller] User", username, "is valid, adding to database..")
         const query = "INSERT INTO users (id, username, password, role) VALUES (?, ?, ?, ?)"
         const id = auth.GenerateID(username, 'user')
         console.log("[DB Controller]", username, "id: ", `(${id})`)
         database.Query(query, id, username, password, 'user')
         resolve()
+    }
+    else if (!UserExists(username)) {
+        console.log("[DB Controller] Error: User", `[${username}]`, "already exists")
+        reject()
     }
     else {
         console.log("[DB Controller] Error: Invalid credentials, unable to add user", `[${username}]`)
@@ -45,8 +50,14 @@ return new Promise((resolve, reject) => {
 })}
 
 async function UserExists(username) {
-    const user = await database.GetQuery("SELECT * FROM users WHERE username = ?", username)
-    return (user != null) ? true : false
+    try {
+        const user = await database.GetQuery(`SELECT * FROM users WHERE username = '${username}'`)
+        return (user && user.length > 0) ? true : false
+    }
+    catch (err) {
+        console.log("[DB Controller] Error while checking if user exists:", err)
+        return false
+    }
 }
 // <=============================================>
 
