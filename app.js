@@ -16,6 +16,10 @@ const browse_router = require("./routes/browse")
 const login_router = require("./routes/login")
 const register_router = require("./routes/register")
 
+// Define parsing middlewares
+server.use(express.urlencoded({ extended: true }))
+server.use(express.json())
+
 // Set the render engine
 server.set("view engine", "ejs")
 console.log("[Server]", "EJS has been set as view engine")
@@ -25,10 +29,12 @@ server.get("/", function (request, response) {
     response.render("index")
 })
 
-// Define static folder and routes
+// Define static folder
 server.use(express.static("static"))
 server.use(express.static("uploads"))
 console.log("[Server]", "Static directory has been setup")
+
+// Define routes
 server.use("/browse", browse_router)
 console.log("[Server]", "Using /browse route")
 server.use("/login", login_router)
