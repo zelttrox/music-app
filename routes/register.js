@@ -7,14 +7,17 @@ const user = require("../src/user")
 const express = require("express")
 const router = express.Router()
 
+
+// GET request handler
 router.get("/", function (request, response) {
     response.render("register")
 })
 
+// POST request handler
 router.post("/", async function (request, response) {
     const user_exists = await database.UserExists(request.body.username)
     if (auth.IsUsernameValid(request.body.username) && auth.IsPasswordValid(request.body.password) && user_exists == false) {
-        console.log("[DB Controller] User", request.body.username, "is valid, attempting to add to database..")
+        console.log("[routes/Register] User", request.body.username, "is valid, attempting to add to database..")
         try {
             const id = auth.GenerateID(request.body.username, 'user')
             await database.AddUser(request.body.username, request.body.password, id)
@@ -30,4 +33,6 @@ router.post("/", async function (request, response) {
     }
 })
 
+
+// Exports
 module.exports = router

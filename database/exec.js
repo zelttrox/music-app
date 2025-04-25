@@ -1,9 +1,10 @@
-// Imports
+// Import modules
 const mysql = require("mysql2");
 const fs = require("fs")
 const path = require("path");
 
-// Setup connection with root user
+
+// Setup database connection with root user
 const database = mysql.createConnection({
     host: "db",
     user: "root",
@@ -12,10 +13,10 @@ const database = mysql.createConnection({
     port: 3306,
 });
 
-// Attempt connection to the database
+
+// Connect to the database
 function Connect() {
 return new Promise((resolve, reject) => {
-    console.log("[DB] Attempting to connect to the database..")
     database.connect((err) => {
         if (err != null) {
             console.error("[DB] Error connecting to the database: ", err)
@@ -28,19 +29,19 @@ return new Promise((resolve, reject) => {
     })
 })}
 
-// Disconnect the database
+// Disconnect from the database
 function Disconnect() {
 return new Promise((resolve, reject) => {
    database.end((err) => {
    if (err != null) {
-      console.log("[DB] Successfully disconnected database!")
+      console.log("[DB] Successfully disconnected from the database!")
       resolve()
    }
    else reject()
    })
 })}
 
-// Initialize database using SQL instructions
+// Initialize a table using SQL instructions
 function Init(table) {
 return new Promise((resolve, reject) => {
 var file_path = path.join(__dirname, table)
@@ -57,32 +58,31 @@ var file_path = path.join(__dirname, table)
     })
 })}
 
-// Attempt to query database
+
+// Send a query to the database
 function Query(query, ...args) {
 return new Promise((resolve, reject) => {
    database.query(query, args, (err) => {
       if (err != null) {
-         console.log("[DB] Error while executing database with query: ", query)
-         console.log("[DB] ", err)
+         console.log("[DB] Error while executing database with query: ", query, "Error:", err)
          reject()
       }
       else resolve()
    })
 })}
 
-// Attempt to get data from the database
+// Send a get query to the database and return it's output
 function GetQuery(query) {
 return new Promise((resolve, reject) => {
    database.query(query, (err, output) => {
       if (err != null) {
-         console.log("[DB] Error while get querying database with query: ", query)
-         console.log(["DB: ", err])
+         console.log("[DB] Error while get querying database with query: ", query, "Error:", err)
          reject(err)
       }
       else resolve(output)
-      console.log("output:", output)
     })
 })}
+
 
 // Exports
 module.exports = {
