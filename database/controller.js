@@ -13,7 +13,7 @@ async function Setup() {
         await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
         await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
 
-        await AddUser("enzoo", "Linux1234!")
+        // await AddUser("enzoo", "Linux1234!")
     }
     catch (err) {
         console.error("[DB Controller] Error:", err);
@@ -44,6 +44,29 @@ async function UserExists(username) {
     catch (err) {
         console.log("[DB Controller] Error while checking if user exists:", err)
         return false
+    }
+}
+
+async function GetUserID(username) {
+    try {
+        const id = await database.GetQuery(`SELECT id FROM users WHERE username = '${username}'`)
+        return id
+    }
+    catch(err) {
+        console.log("[DB Controller] Error while getting user ID:", err)
+    }
+}
+
+async function GetPassByID(id) {
+    try {
+        const passwd = await database.GetQuery(`SELECT password FROM users WHERE id = '${id}'`)
+        if (passwd != null) {
+            return passwd
+        }
+        else console.log("[DB Controller] Error: Password does not match with id:", id)
+    }
+    catch(err) {
+        console.log("[DB Controller] Error while getting user password:", err)
     }
 }
 // <=============================================>
@@ -82,5 +105,8 @@ module.exports = {
     Setup,
     GetSongs,
     songs,
-    AddUser
+    AddUser,
+    UserExists,
+    GetUserID,
+    GetPassByID
 }

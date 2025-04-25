@@ -12,17 +12,17 @@ router.get("/", function (request, response) {
 })
 
 router.post("/", async function (request, response) {
-    const user_exists = await UserExists(username)
-    if (auth.IsUsernameValid(username) && auth.IsPasswordValid(password) && user_exists == false) {
-        console.log("[DB Controller] User", username, "is valid, attempting to add to database..")
+    const user_exists = await database.UserExists(request.body.username)
+    if (auth.IsUsernameValid(request.body.username) && auth.IsPasswordValid(request.body.password) && user_exists == false) {
+        console.log("[DB Controller] User", request.body.username, "is valid, attempting to add to database..")
         try {
-            const id = auth.GenerateID(username, 'user')
+            const id = auth.GenerateID(request.body.username, 'user')
             await database.AddUser(request.body.username, request.body.password, id)
             user.data = new user.User(request.body.username, id)
             response.redirect("/")
         }
-        catch(error) {
-            console.log(`[Server] Error while registering: ${error}`)
+        catch(err) {
+            console.log(`[Server] Error while registering: ${err}`)
         }
     }
     else {
