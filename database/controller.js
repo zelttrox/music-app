@@ -13,7 +13,7 @@ async function Setup() {
         await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
         await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
 
-        // await AddUser("enzoo", "Linux1234!")
+        await AddUser("1", "tony", "Tonic1!")
     }
     catch (err) {
         console.error("[DB Controller] Error:", err);
@@ -27,7 +27,7 @@ async function Setup() {
 // Add a user to the database
 // TODO: Also ask for email
 // TODO: Email verificationw
-async function AddUser(username, password, id) {
+async function AddUser(id, username, password) {
 return new Promise((resolve, reject) => {
         const query = "INSERT INTO users (id, username, password, role) VALUES (?, ?, ?, ?)"
         console.log("[DB Controller]", username, "id: ", `(${id})`)
@@ -58,12 +58,11 @@ async function GetUserID(username) {
 }
 
 async function GetPassByID(id) {
+    console.log("id:", id)
     try {
         const passwd = await database.GetQuery(`SELECT password FROM users WHERE id = '${id}'`)
-        if (passwd != null) {
-            return passwd
-        }
-        else console.log("[DB Controller] Error: Password does not match with id:", id)
+            console.log("passwd:", passwd)
+            return passwd[0]["password"]
     }
     catch(err) {
         console.log("[DB Controller] Error while getting user password:", err)

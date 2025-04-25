@@ -80,7 +80,7 @@ return new Promise((resolve, reject) => {
          reject(err)
       }
       else resolve(output)
-      console.log(output)
+      console.log("output:", output)
     })
 })}
 
