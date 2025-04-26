@@ -20,7 +20,7 @@ router.post("/", async function (request, response) {
         console.log("[routes/Register] User", request.body.username, "is valid, attempting to add to database..")
         try {
             const id = auth.GenerateID(request.body.username, 'user')
-            await database.AddUser(request.body.username, request.body.password, id)
+            await database.AddUser(id, request.body.username, request.body.password)
             user.data = new user.User(request.body.username, id)
             response.redirect("/")
         }

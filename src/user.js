@@ -1,6 +1,3 @@
-var data = undefined
-
-
 // Contain the data of the connected user
 class User {
     username
@@ -14,6 +11,8 @@ class User {
     getUsername() {return this.username}
     getID() {return this.id}
 }
+
+var data = new User("Guest", "0")
 
 
 // Exports

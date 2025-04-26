@@ -12,8 +12,6 @@ async function Setup() {
         await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
         await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
         await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
-
-        await AddUser("1", "tony", "Tonic1!")
     }
     catch (err) {
         console.error("[DB Controller] Error:", err);

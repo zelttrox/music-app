@@ -1,5 +1,6 @@
 // Import scripts
 const database = require("./database/controller")
+const user = require("./src/user")
 
 // Import modules
 const express = require("express")
@@ -27,7 +28,8 @@ server.use(express.static("uploads"))
 
 // Root GET request handler
 server.get("/", function (request, response) {
-    response.render("index")
+    const username = user.data.getUsername()
+    response.render("index", {username: username})
 })
 
 // Define routes
