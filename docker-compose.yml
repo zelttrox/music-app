@@ -5,6 +5,9 @@ services:
     build:
       dockerfile: dockerfile
     container_name: music-app
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - "3030:3030"
     networks:
