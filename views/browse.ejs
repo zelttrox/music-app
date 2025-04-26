@@ -9,15 +9,7 @@
 
 <body>
   <header>
-    <nav class="navbar">
-      <ul>
-        <li><a href="/playlists">Playlists</a></li>
-        <li><a href="/">Home</a></li>
-        <li><a href="/browse">Browse</a></li>
-        <li><a href="/search">Search</a></li>
-        <li><a href="/account">Account</a></li>
-      </ul>
-    </nav>
+    <%- include('../static/navbar', {username: username}) %>
   </header>
 
   <main>
@@ -38,8 +30,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 My Music App. All rights reserved.</p>
-    <a class="link" href="https://github.com/zelttrox/music-app"> Source code </a>
+    <%- include('../static/footer') %>
   </footer>
 </body>
 

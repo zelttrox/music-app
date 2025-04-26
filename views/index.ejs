@@ -9,20 +9,7 @@
 
 <body>
   <header>
-    <nav class="navbar">
-      <div class="navbar-section navbar-left">
-        <a href="/playlists">Playlists</a>
-      </div>
-      <div class="navbar-section navbar-center">
-        <a href="/">Home</a>
-        <input type="text" name="search_input" placeholder="Song title, artist, style..">
-        <a href="/browse">Browse</a>
-      </div>
-      <div class="navbar-section navbar-right">
-        <p class="nickname"> <%= username %> </p>
-        <a href="/login">Account</a>
-      </div>
-    </nav>
+    <%- include('../static/navbar', {username: username}) %>
   </header>
 
   <main>
@@ -30,8 +17,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 My Music App. All rights reserved.</p>
-    <a class="link" href="https://github.com/zelttrox/music-app"> Source code </a>
+    <%- include('../static/footer') %>
   </footer>
 </body>
 
