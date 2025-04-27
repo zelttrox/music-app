@@ -14,5 +14,6 @@ COPY . .
 
 # Launch the app on port 3030
 EXPOSE 3030
-CMD ["npm", "run", "dev"]
+CMD ["node", "app.js"]
 #   ["node", "app.js"]
+#   ["npm", "run", "dev"/"app"]

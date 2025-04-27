@@ -14,6 +14,7 @@ const port = 3030
 const browse_router = require("./routes/browse")
 const login_router = require("./routes/login")
 const register_router = require("./routes/register")
+const apply_router = require("./routes/apply")
 
 // Define parsing middlewares
 server.use(express.urlencoded({extended: true}))
@@ -28,8 +29,7 @@ server.use(express.static("uploads"))
 
 // Root GET request handler
 server.get("/", function (request, response) {
-    const username = user.data.getUsername()
-    response.render("index", {username: username})
+    response.render("index", {user: user.data})
 })
 
 // Define routes
@@ -39,6 +39,8 @@ server.use("/login", login_router)
 console.log("[Server]", "Using /login route")
 server.use("/register", register_router)
 console.log("[Server]", "Using /register route")
+server.use("/apply", apply_router)
+console.log("[Server]", "Using /apply route")
 
 // Initialize the MySQL database
 async function InitDatabase() {

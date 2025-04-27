@@ -8,8 +8,8 @@
       <a href="/browse">Browse</a>
     </div>
     <div class="navbar-section navbar-right">
-      <p class="nickname"> <%= username %> </p>
-      <% if (username == "Guest") { %>
+      <p class="nickname"> <%= user.username %> </p>
+      <% if (user.getUsername() == "Guest") { %>
         <a href="/login">Login</a>
       <% } else { %>
         <a href="/">Profile</a>
