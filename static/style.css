@@ -112,7 +112,7 @@ footer {
     font-weight: 700;
 }
 
-/* REGISTER/LOGIN */
+/* REGISTER/LOGIN/APPLY */
 .auth-container {
     max-width: 400px;
     margin: 40px auto;
@@ -173,3 +173,9 @@ footer {
   .auth-link a:hover {
     text-decoration: underline;
   }
+
+  .text {
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+}
