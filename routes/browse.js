@@ -1,5 +1,6 @@
 // Import scripts
 const database = require("../database/controller")
+const user = require("../src/user")
 
 // Import modules
 const express = require("express")
@@ -17,7 +18,7 @@ router.param("id", function (request, response, next, id) {
 // GET request handler
 router.get("/", function (request, response) {
     const songs = database.songs
-    response.render("browse", {songs: songs})
+    response.render("browse", {user: user.data, songs: songs})
 })
 
 // Set route using ID parameter

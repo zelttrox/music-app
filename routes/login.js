@@ -9,7 +9,7 @@ const router = express.Router()
 
 // GET request handler
 router.get("/", function (request, response) {
-    response.render("login")
+    response.render("login", {user: user.data})
 })
 
 // POST request handler
@@ -19,7 +19,7 @@ router.post("/", async function (request, response) {
             const id = await database.GetUserID(request.body.username)
             const passwd = await database.GetPassByID(id[0]["id"])
             if (request.body.password == passwd) {
-                user.data = new user.User(request.body.username, id)
+                Object.assign(user.data, {id: id, username: request.body.username})
             }
             else console.log(`[Auth] Error: Password (${request.body.password}) did not match`)
         }

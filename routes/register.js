@@ -10,18 +10,18 @@ const router = express.Router()
 
 // GET request handler
 router.get("/", function (request, response) {
-    response.render("register")
+    response.render("register", {user: user.data})
 })
 
 // POST request handler
 router.post("/", async function (request, response) {
     const user_exists = await database.UserExists(request.body.username)
     if (auth.IsUsernameValid(request.body.username) && auth.IsPasswordValid(request.body.password) && user_exists == false) {
-        console.log("[routes/Register] User", request.body.username, "is valid, attempting to add to database..")
+        console.log("[Auth] User", request.body.username, "is valid, attempting to add to database..")
         try {
             const id = auth.GenerateID(request.body.username, 'user')
             await database.AddUser(id, request.body.username, request.body.password)
-            user.data = new user.User(request.body.username, id)
+            Object.assign(user.data, {id: id, username: request.body.username})
             response.redirect("/")
         }
         catch(err) {

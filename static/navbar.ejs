@@ -9,7 +9,7 @@
     </div>
     <div class="navbar-section navbar-right">
       <p class="nickname"> <%= user.username %> </p>
-      <% if (user.getUsername() == "Guest") { %>
+      <% if (user.username == "Guest") { %>
         <a href="/login">Login</a>
       <% } else { %>
         <a href="/">Profile</a>
