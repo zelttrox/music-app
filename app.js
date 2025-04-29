@@ -16,6 +16,7 @@ const login_router = require("./routes/login")
 const register_router = require("./routes/register")
 const profile_router = require("./routes/profile")
 const apply_router = require("./routes/apply")
+const admin_router = require("./routes/admin")
 
 // Define parsing middlewares
 server.use(express.urlencoded({extended: true}))
@@ -44,6 +45,7 @@ server.use("/profile", profile_router)
 console.log("[Server]", "Using /profile route")
 server.use("/apply", apply_router)
 console.log("[Server]", "Using /apply route")
+server.use("/admin1234", admin_router)
 
 // Set user as guest
 user.Clear()

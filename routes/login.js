@@ -18,8 +18,11 @@ router.post("/", async function (request, response) {
         try {
             const id = await database.GetUserID(request.body.username)
             const passwd = await database.GetPassByID(id[0]["id"])
+            const role = await database.GetRole(id[0]["id"])
             if (request.body.password == passwd) {
-                Object.assign(user.data, {id: id, username: request.body.username})
+                Object.assign(user.data, {id: id, username: request.body.username, role: role})
+                console.log(user.data)
+                response.redirect("/")
             }
             else console.log(`[Auth] Error: Password (${request.body.password}) did not match`)
         }

@@ -1,5 +1,6 @@
 // Import scripts
 const database = require("../database/exec")
+const user = require("../src/user")
 
 
 // Setup the database and add songs and users
@@ -13,6 +14,8 @@ async function Setup() {
         await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
         await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
         await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
+
+        await AddUser("a0", "admin0", "0192837465", 'admin')
     }
     catch (err) {
         console.error("[DB Controller] Error:", err);
@@ -24,11 +27,11 @@ async function Setup() {
 // Add a user to the database
 // TODO: Also ask for email
 // TODO: Email verificationw
-async function AddUser(id, username, password) {
+async function AddUser(id, username, password, role) {
 return new Promise((resolve, reject) => {
         const query = "INSERT INTO users (id, username, password, role) VALUES (?, ?, ?, ?)"
         console.log(`[DB] Added user ${username} with id ${id}`)
-        database.Query(query, id, username, password, 'user')
+        database.Query(query, id, username, password, role)
         resolve()
     }
 )}
@@ -43,6 +46,17 @@ async function UserExists(username) {
     catch (err) {
         console.log("[DB] Error while checking if user exists:", err)
         return false
+    }
+}
+
+async function IsAdmin(id) {
+    try {
+        if (user.data.username == "Guest") return false
+        const role = await database.GetQuery(`SELECT role FROM users where id = '${id}'`)
+        return (role == 'amdin') ? true : false
+    }
+    catch(error) {
+        console.log(`[DB] Error while checking privileges: ${error}`)
     }
 }
 
@@ -65,6 +79,15 @@ async function GetPassByID(id) {
     }
     catch(err) {
         console.log("[DB] Error while getting user password:", err)
+    }
+}
+
+async function GetRole(id) {
+    try {
+    return await database.GetQuery(`SELECT role FROM users WHERE id = '${id}'`)
+    }
+    catch(error) {
+        console.log("[DB] Error while getting user role:", error)
     }
 }
 
@@ -105,6 +128,7 @@ async function AddApply(username, user_id, pro_mail, label, tunecore, copyrights
         })
 }
 
+
 // Exports
 module.exports = {
     Setup,
@@ -112,7 +136,9 @@ module.exports = {
     songs,
     AddUser,
     UserExists,
+    IsAdmin,
     GetUserID,
     GetPassByID,
+    GetRole,
     AddApply
 }
