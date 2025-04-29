@@ -36,6 +36,13 @@ return new Promise((resolve, reject) => {
     }
 )}
 
+// Promote a user to artist
+async function Promote(id) {
+    return new Promise((resolve, reject) => {
+        database.Query(`UPDATE users SET role = 'artist' WHERE id = '${id}'`)
+        resolve()
+    })
+}
 
 // Check if a user exists in the users table
 async function UserExists(username) {
@@ -128,7 +135,14 @@ async function AddApply(username, user_id, pro_mail, label, tunecore, copyrights
         console.log(`[DB] Adding apply for (${username} | ${pro_mail})`)
         database.Query(query, username, user_id, pro_mail, label, tunecore, copyrights)
         resolve()
-        })
+    })
+}
+
+async function RemoveApply(id) {
+    return new Promise((resolve, reject) => {
+        database.Query(`DELETE FROM applies WHERE user_id = '${id}'`)
+        resolve()
+    })
 }
 
 // Return all the artist applies from the database
@@ -145,15 +159,10 @@ async function GetApplies() {
 // Exports
 module.exports = {
     Setup,
-    GetSongs,
-    songs,
-    AddUser,
-    UserExists,
-    IsAdmin,
-    GetUserID,
-    GetPassByID,
-    GetRole,
-    AddApply,
-    GetApplies,
-    applies
+    GetSongs, songs,
+    AddUser, Promote,
+    UserExists, IsAdmin,
+    GetUserID, GetPassByID, GetRole,
+    AddApply, RemoveApply,
+    GetApplies, applies
 }

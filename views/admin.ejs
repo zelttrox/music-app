@@ -22,11 +22,13 @@
             <p class="text"> Tunecore account: <%= apply.tunecore %> </p>
             <p class="text"> Copyrights: <%= apply.copyrights %> </p>
             <br>
-            <form>
-                <button class="btn-primary">Accept</button>
+            <form action="/accept" method="POST">
+              <input type="hidden" name="apply_id" value="<%= apply.user_id %>">
+              <button class="btn-primary" type="submit">Accept</button>
             </form>
-            <form>
-                <button class="btn-primary">Deny</button>
+            <form action="/deny" method="POST">
+              <input type="hidden" name="apply_id" value="<%= apply.user_id %>">
+              <button class="btn-primary" type="submit">Deny</button>
             </form>
         </div>
     <% }) %>

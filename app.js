@@ -67,3 +67,7 @@ server.listen(port, function () {
     console.log("[Server]", "Server started on port", port)
     console.log("[Server]", "Now listening..")
 })
+
+
+// Exports
+module.exports = admin_route_pass
