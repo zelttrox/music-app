@@ -14,6 +14,21 @@ router.get("/", function (request, response) {
 
 // POST request handler
 router.post("/", async function (request, response) {
+    if (user.username != "Guest") {
+        try {
+        database.AddApply(
+            user.data.username, user.data.id,
+            request.body.pro_mail,
+            request.body.label,
+            request.body.tunecore,
+            request.body.copyrights
+            ) 
+        }
+        catch(error) {
+            console.log(`[DB] Error while adding apply: ${error}`)
+        }
+    }
+    else response.redirect("/login")
 })
 
 

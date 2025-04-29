@@ -8,6 +8,7 @@ async function Setup() {
         await database.Connect()
         await database.Init("users.sql")
         await database.Init("songs.sql")
+        await database.Init("applies.sql")
 
         await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
         await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
@@ -94,11 +95,11 @@ async function GetSongs() {
 
 
 // Add a new artist apply request to the database
-async function AddApply(number, username, user_id, pro_mail, label, tunecore, copyrights) {
+async function AddApply(username, user_id, pro_mail, label, tunecore, copyrights) {
     return new Promise((resolve, reject) => {
-        var query = "INSERT INTO applies (number, username, user_id, pro_mail, laber, tunecore, copyrights) VALUES (?, ?, ?, ?, ?, ?, ?)"
-        console.log(`[DB] Adding apply n°${number} for (${username} | ${pro_mail})`)
-        database.Query(query, number, username, user_id, pro_mail, label, tunecore, copyrights)
+        var query = "INSERT INTO applies (username, user_id, pro_mail, label, tunecore, copyrights) VALUES (?, ?, ?, ?, ?, ?)"
+        console.log(`[DB] Adding apply for (${username} | ${pro_mail})`)
+        database.Query(query, username, user_id, pro_mail, label, tunecore, copyrights)
         resolve()
         })
 }
@@ -111,5 +112,6 @@ module.exports = {
     AddUser,
     UserExists,
     GetUserID,
-    GetPassByID
+    GetPassByID,
+    AddApply
 }
