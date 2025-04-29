@@ -4,11 +4,14 @@ var data = {
     id: ""
 }
 
-data.id = "0"
-data.username = "Guest"
+function Clear() {
+    data.id = "0"
+    data.username = "Guest"
+}
 
 
 // Exports
 module.exports = {
-    data
+    data,
+    Clear
 }

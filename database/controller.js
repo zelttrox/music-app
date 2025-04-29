@@ -33,6 +33,7 @@ return new Promise((resolve, reject) => {
     }
 )}
 
+
 // Check if a user exists in the users table
 async function UserExists(username) {
     try {

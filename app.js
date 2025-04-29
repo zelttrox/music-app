@@ -14,6 +14,7 @@ const port = 3030
 const browse_router = require("./routes/browse")
 const login_router = require("./routes/login")
 const register_router = require("./routes/register")
+const profile_router = require("./routes/profile")
 const apply_router = require("./routes/apply")
 
 // Define parsing middlewares
@@ -39,8 +40,13 @@ server.use("/login", login_router)
 console.log("[Server]", "Using /login route")
 server.use("/register", register_router)
 console.log("[Server]", "Using /register route")
+server.use("/profile", profile_router)
+console.log("[Server]", "Using /profile route")
 server.use("/apply", apply_router)
 console.log("[Server]", "Using /apply route")
+
+// Set user as guest
+user.Clear()
 
 // Initialize the MySQL database
 async function InitDatabase() {
