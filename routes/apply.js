@@ -12,6 +12,10 @@ router.get("/", function (request, response) {
     response.render("apply", {user: user.data})
 })
 
+// POST request handler
+router.post("/", async function (request, response) {
+})
+
 
 // Exports
 module.exports = router

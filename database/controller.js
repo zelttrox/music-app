@@ -93,6 +93,16 @@ async function GetSongs() {
 }
 
 
+// Add a new artist apply request to the database
+async function AddApply(number, username, user_id, pro_mail, label, tunecore, copyrights) {
+    return new Promise((resolve, reject) => {
+        var query = "INSERT INTO applies (number, username, user_id, pro_mail, laber, tunecore, copyrights) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        console.log(`[DB] Adding apply n°${number} for (${username} | ${pro_mail})`)
+        database.Query(query, number, username, user_id, pro_mail, label, tunecore, copyrights)
+        resolve()
+        })
+}
+
 // Exports
 module.exports = {
     Setup,
