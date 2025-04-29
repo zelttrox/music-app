@@ -6,10 +6,12 @@ const user = require("../src/user")
 const express = require("express")
 const router = express.Router()
 
-
+// TODO: Handle user/guest visit
 // GET request handler
 router.get("/", async function (request, response) {
-        response.render("admin",  {user: user.data})
+    database.applies = await database.GetApplies()
+    const applies = database.applies
+    response.render("admin",  {user: user.data, applies: applies})       
 })
 
 

@@ -27,7 +27,7 @@ async function Setup() {
 // Add a user to the database
 // TODO: Also ask for email
 // TODO: Email verificationw
-async function AddUser(id, username, password, role) {
+async function AddUser(id, username, password, role = 'user') {
 return new Promise((resolve, reject) => {
         const query = "INSERT INTO users (id, username, password, role) VALUES (?, ?, ?, ?)"
         console.log(`[DB] Added user ${username} with id ${id}`)
@@ -49,6 +49,7 @@ async function UserExists(username) {
     }
 }
 
+// Check if a user has admin role using it's ID
 async function IsAdmin(id) {
     try {
         if (user.data.username == "Guest") return false
@@ -82,6 +83,7 @@ async function GetPassByID(id) {
     }
 }
 
+// Return the role of a user using it's ID
 async function GetRole(id) {
     try {
     return await database.GetQuery(`SELECT role FROM users WHERE id = '${id}'`)
@@ -101,6 +103,7 @@ return new Promise((resolve, reject) => {
     id = id.replace(" ", "-")
     console.log(`[DB] Adding song ${id} to the database`)
     database.Query(query, id, name, artist, track)
+    songs = GetSongs()
     resolve()
     })
 }
@@ -112,8 +115,8 @@ async function GetSongs() {
         const data = await database.GetQuery("SELECT * FROM songs")
         return data
     }
-    catch (err) {
-        console.log("[DB] Error:", err)
+    catch(error) {
+        console.log("[DB] Error while getting songs:", error)
     }
 }
 
@@ -128,6 +131,16 @@ async function AddApply(username, user_id, pro_mail, label, tunecore, copyrights
         })
 }
 
+// Return all the artist applies from the database
+var applies
+async function GetApplies() {
+    try {
+        return await database.GetQuery(`SELECT * FROM applies`)
+    }
+    catch(error) {
+        console.log("[DB] Error while getting applies:", error)
+    }
+}
 
 // Exports
 module.exports = {
@@ -140,5 +153,7 @@ module.exports = {
     GetUserID,
     GetPassByID,
     GetRole,
-    AddApply
+    AddApply,
+    GetApplies,
+    applies
 }

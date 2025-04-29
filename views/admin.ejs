@@ -11,6 +11,25 @@
   <main>
     <% if (user.role[0]["role"] === 'admin') { %>
     <h1>Admin panel</h1>
+    <% applies.forEach(function(apply) { %>
+        <div clas="song-item">
+            <p class="text"> Apply request n°<%= apply.number %> </p>
+            <p class="text"> User: <%= apply.username %> </p>
+            <p class="text"> User ID: <%= apply.user_id %> </p>
+            <br>
+            <p class="text"> Email: <%= apply.pro_mail %> </p>
+            <p class="text"> Music label: <%= apply.label %> </p>
+            <p class="text"> Tunecore account: <%= apply.tunecore %> </p>
+            <p class="text"> Copyrights: <%= apply.copyrights %> </p>
+            <br>
+            <form>
+                <button class="btn-primary">Accept</button>
+            </form>
+            <form>
+                <button class="btn-primary">Deny</button>
+            </form>
+        </div>
+    <% }) %>
     <% } %>
   </main>
 </body>

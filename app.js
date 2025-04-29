@@ -45,7 +45,10 @@ server.use("/profile", profile_router)
 console.log("[Server]", "Using /profile route")
 server.use("/apply", apply_router)
 console.log("[Server]", "Using /apply route")
-server.use("/admin1234", admin_router)
+
+// Define admin route
+const admin_route_pass = "xD1q4l8Sq5p3aVe8"
+server.use(`/admin${admin_route_pass}`, admin_router)
 
 // Set user as guest
 user.Clear()
@@ -54,6 +57,7 @@ user.Clear()
 async function InitDatabase() {
     await database.Setup()
     database.songs = await database.GetSongs()
+    database.applies = await database.GetApplies()
 }
 
 InitDatabase()

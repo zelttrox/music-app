@@ -22,7 +22,8 @@ router.post("/", async function (request, response) {
             request.body.label,
             request.body.tunecore,
             request.body.copyrights
-            ) 
+            )
+        response.redirect("/")
         }
         catch(error) {
             console.log(`[DB] Error while adding apply: ${error}`)
