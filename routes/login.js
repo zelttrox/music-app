@@ -1,5 +1,6 @@
 // Import scripts
 const database = require("../database/controller")
+const security = require("../src/security")
 const user = require("../src/user")
 
 // Import modules
@@ -14,6 +15,7 @@ router.get("/", function (request, response) {
 
 // POST request handler
 router.post("/", async function (request, response) {
+    if (security.IsSQL(request.body.username) || security.IsSQL(request.body.password)) return
     if (database.UserExists(request.body.username)) {
         try {
             const id = await database.GetUserID(request.body.username)
@@ -28,6 +30,10 @@ router.post("/", async function (request, response) {
         catch(err) {
             console.log("[Auth] Error:", err)
         }
+    }
+    else {
+        console.log("[Auth] User does not exist")
+        response.redirect("/register")
     }
 })
 
