@@ -17,17 +17,18 @@
             <p class="text"> User: <%= apply.username %> </p>
             <p class="text"> User ID: <%= apply.user_id %> </p>
             <br>
+            <p class="text"> Artist name: <%= apply.artist_name %> </p>
             <p class="text"> Email: <%= apply.pro_mail %> </p>
             <p class="text"> Music label: <%= apply.label %> </p>
             <p class="text"> Tunecore account: <%= apply.tunecore %> </p>
             <p class="text"> Copyrights: <%= apply.copyrights %> </p>
             <br>
-            <form action="/accept" method="POST">
+            <form action="/admin/accept" method="POST">
               <input type="hidden" name="apply_id" value="<%= apply.user_id %>">
               <button class="btn-primary" type="submit">Accept</button>
             </form>
-            <form action="/deny" method="POST">
-              <input type="hidden" name="apply_id" value="<%= apply.user_id %>">
+            <form action="/admin/deny" method="POST">
+              <input type="hidden" name="apply_id" value="<%= apply.user_id %>, <%= apply.artist_name %>">
               <button class="btn-primary" type="submit">Deny</button>
             </form>
         </div>

@@ -37,9 +37,10 @@ return new Promise((resolve, reject) => {
 )}
 
 // Promote a user to artist
-async function Promote(id) {
+async function Promote(id, artist_name) {
     return new Promise((resolve, reject) => {
         database.Query(`UPDATE users SET role = 'artist' WHERE id = '${id}'`)
+        database.Query(`UPDATE users SET artist_name = '${artist_name}' WHERE id = '${id}'`)
         resolve()
     })
 }
@@ -100,6 +101,17 @@ async function GetRole(id) {
     }
 }
 
+// Return every user with artist role
+var artists
+async function GetArtists() {
+    try {
+        return await database.GetQuery(`SELECT * FROM users WHERE role = 'artist'`)
+    }
+    catch(error) {
+        console.log("[DB] Error while getting artists:", error)
+    }
+}
+
 
 // Add a song to the database
 // TODO: artist property should redirect to a user with artist role
@@ -129,20 +141,26 @@ async function GetSongs() {
 
 
 // Add a new artist apply request to the database
-async function AddApply(username, user_id, pro_mail, label, tunecore, copyrights) {
+async function AddApply(username, user_id, artist_name, pro_mail, label, tunecore, copyrights) {
     return new Promise((resolve, reject) => {
-        var query = "INSERT INTO applies (username, user_id, pro_mail, label, tunecore, copyrights) VALUES (?, ?, ?, ?, ?, ?)"
+        var query = "INSERT INTO applies (username, user_id, artist_name, pro_mail, label, tunecore, copyrights) VALUES (?, ?, ?, ?, ?, ?, ?)"
         console.log(`[DB] Adding apply for (${username} | ${pro_mail})`)
-        database.Query(query, username, user_id, pro_mail, label, tunecore, copyrights)
+        database.Query(query, username, user_id, artist_name, pro_mail, label, tunecore, copyrights)
         resolve()
     })
 }
 
+// Remove an artist apply request from the database
 async function RemoveApply(id) {
     return new Promise((resolve, reject) => {
         database.Query(`DELETE FROM applies WHERE user_id = '${id}'`)
         resolve()
     })
+}
+
+// Return the artist name of an apply
+async function GetArtistName(apply_number) {
+    return await database.GetQuery(`SELECT artist_name FROM applies WHERE number = '${apply_number}'`)
 }
 
 // Return all the artist applies from the database
@@ -160,9 +178,11 @@ async function GetApplies() {
 module.exports = {
     Setup,
     GetSongs, songs,
+    GetArtists, artists,
     AddUser, Promote,
     UserExists, IsAdmin,
     GetUserID, GetPassByID, GetRole,
     AddApply, RemoveApply,
+    GetArtistName,
     GetApplies, applies
 }

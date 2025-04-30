@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM('user', 'artist', 'admin') NOT NULL DEFAULT 'user',
-    dislay_name VARCHAR(255),
+    artist_name VARCHAR(255),
     profile_picture VARCHAR(255),
     bio VARCHAR(255)
 );

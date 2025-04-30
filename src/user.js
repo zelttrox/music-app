@@ -8,7 +8,7 @@ var data = {
 function Clear() {
     data.id = "0"
     data.username = "Guest"
-    data.role = undefined
+    data.role = 'guest'
 }
 
 

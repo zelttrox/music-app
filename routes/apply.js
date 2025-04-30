@@ -18,6 +18,7 @@ router.post("/", async function (request, response) {
         try {
         database.AddApply(
             user.data.username, user.data.id,
+            request.body.artist_name,
             request.body.pro_mail,
             request.body.label,
             request.body.tunecore,

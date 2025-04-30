@@ -18,9 +18,10 @@ router.get("/", async function (request, response) {
 // POST request handler when accepting an apply
 router.post("/accept", async function (request, response) {
     try {
-        database.Promote(request.body.apply_id)
-        database.RemoveApply(request.body.apply_id)
-        response.redirect(`/admin${server.admin_route_pass}`)
+        const artist_name = database.GetArtistName()
+        await database.Promote(request.body.apply_id, request.body.artist_name)
+        await database.RemoveApply(request.body.apply_id)
+        response.redirect("/admin")
     }
     catch(error) {
         console.log("[DB] Error:", error)
@@ -31,7 +32,7 @@ router.post("/accept", async function (request, response) {
 router.post("/deny", async function (request, response) {
     try {
         database.RemoveApply(request.body.apply_id)
-        response.redirect(`/admin${server.admin_route_pass}`)
+        response.redirect("/admin")
     }
     catch(error) {
         console.log("[DB] Error:", error)
