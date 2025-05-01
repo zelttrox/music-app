@@ -17,15 +17,20 @@
     <div class="songs-container"> 
 
       <% songs.forEach(function(song) { %>
-      <div clas="song-item">
-        <p class="song-text"> <%= song.name %> </p>
-        <p class="song-text"> By <%= song.artist %> </p>
-        <audio controls>
-          <source src="<%= song.track %>" type="audio/mpeg">
-        </audio>
-      </div>
+        <div class="song-item">
+            <div class="song-item-info">
+              <button class="btn-song"> <%= song.name %> </button>
+              <p class="song-text"> by </p>
+              <button class="btn-song"> <%= song.artist %> </button>
+            </div>
+            <div class="song-item-player">
+              <audio controls>
+                <source src="<%= song.track %>" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+          <br>
       <% }) %>
-
     </div>
   </main>
 

@@ -8,6 +8,7 @@
     --footer-color: rgb(34, 34, 34);
     --footer-text-color: white;
     --accent-color: rgb(185, 123, 255);
+    --accent-color-low: rgb(145, 72, 228);
     --accent-color-hover: rgb(174, 104, 255);
 }
 
@@ -43,48 +44,55 @@ footer {
 
 /* MENU */
 .navbar {
-    background-color: var(--navbar-color);
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color: var(--navbar-color);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .navbar-section {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 .navbar-center {
-    flex: 1;
-    justify-content: center;
-    display: flex;
+  flex: 1;
+  justify-content: center;
+  display: flex;
 }
 .navbar-left,
 .navbar-right {
-    flex: 0 0 auto;
+  flex: 0 0 250px; /* Set equal fixed width for both sides */
+}
+.navbar-left {
+  justify-content: flex-start; /* Align content to the left */
+}
+.navbar-right {
+  justify-content: flex-end; /* Align content to the right */
 }
 .navbar-center input[type="text"] {
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: none;
-    margin: 0 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  margin: 0 0.5rem;
+  width: 300px; /* Set a fixed width for the search input */
 }
 .nickname {
-    margin: 0;
-    color: var(--navbar-text-color);
-    font-weight: bold;
+  margin: 0;
+  color: var(--navbar-text-color);
+  font-weight: bold;
 }
 .navbar a {
-    text-decoration: none;
-    color: var(--navbar-text-color);
-    font-weight: bold;
-    transition: 0.3s;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+  text-decoration: none;
+  color: var(--navbar-text-color);
+  font-weight: bold;
+  transition: 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 .navbar a:hover {
-    background-color: var(--navbar-hover-color);
-    color: var(--accent-color);
+  background-color: var(--navbar-hover-color);
+  color: var(--accent-color);
 }
 
 
@@ -96,14 +104,29 @@ footer {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #43275e5e;
+    background-color: var(--background-color);
 }
   
 .song-item {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: var(--container-color);
+  border: 1px solid var(--accent-color-low);
+  border-radius: 5px;
+
+}
+
+.song-item-info {
+  display: flex;
+  flex-direction: row;
+  height: 4rem;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.song-item-player {
 }
 
 .song-text {
@@ -178,4 +201,30 @@ footer {
     font-size: 20px;
     color: white;
     font-weight: 700;
+}
+
+.btn-song {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 70px;
+  border: 1px solid var(--accent-color);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: var(--accent-color-low);
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.btn-song:hover {
+  background: var(--accent-color);
+  box-shadow: 0 0 5px 5px var(--accent-color-low);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
 }
