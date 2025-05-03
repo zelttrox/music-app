@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Music App</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <header>
+    <%- include('../static/navbar', {user: user}) %>
+  </header>
+
+  <main>
+    <div class="auth-container">
+      <h1>Upload a new song </h1>
+      <form action="/upload" method="POST" class="auth-form">
+        <div class="form-group">
+          <label for="song_name">Song name</label>
+          <input type="text" id="song_name" name="song_name" required>
+        </div>
+        <div class="form-group">
+          <label for="track">Song track</label>
+          <input type="file" id="track" name="track" required>
+        </div>
+        <button type="submit" class="btn-primary">Upload</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <%- include('../static/footer') %>
+  </footer>
+</body>
+
+</html>

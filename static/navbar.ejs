@@ -8,7 +8,12 @@
       <a href="/browse">Browse</a>
     </div>
     <div class="navbar-section navbar-right">
-          <a href="/apply"> Become an artist </a>
+      <% if (user.role == 'user') { %>
+        <a href="/apply"> Become an artist </a>
+      <% } else if (user.role == 'artist') { %>
+        <a href="/upload"> Upload new song </a>
+      <% } %>
+          
       <p class="nickname"> <%= user.username %> </p>
       <% if (user.username == "Guest") { %>
         <a href="/login">Login</a>

@@ -166,8 +166,14 @@ footer {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
+    background-color: var(--background-color);
+    color: white;
   }
   
+  .form-group input:hover {
+    border: 1px solid var(--accent-color);
+  }
+
   .btn-primary {
     padding: 12px;
     background-color: var(--accent-color);

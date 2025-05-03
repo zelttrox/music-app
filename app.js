@@ -18,6 +18,7 @@ const login_router = require("./routes/login")
 const register_router = require("./routes/register")
 const profile_router = require("./routes/profile")
 const apply_router = require("./routes/apply")
+const upload_router = require("./routes/upload")
 const admin_router = require("./routes/admin")
 
 
@@ -52,6 +53,8 @@ console.log("[Server]", "Using /profile route")
 
 server.use("/apply", apply_router)
 console.log("[Server]", "Using /apply route")
+server.use("/upload", upload_router)
+console.log("[Server]", "Using /upload route")
 
 // Define admin route
 server.use("/admin", admin_router)
