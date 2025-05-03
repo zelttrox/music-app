@@ -11,11 +11,11 @@ async function Setup() {
         await database.Init("songs.sql")
         await database.Init("applies.sql")
 
-        await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
-        await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
-        await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
+        // await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
+        // await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
+        // await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
 
-        await AddUser("a0", "admin0", "0192837465", 'admin')
+        // await AddUser("a0", "admin0", "0192837465", 'admin')
     }
     catch (err) {
         console.error("[DB Controller] Error:", err);
@@ -102,7 +102,6 @@ async function GetRole(id) {
 }
 
 // Return every user with artist role
-var artists
 async function GetArtists() {
     try {
         return await database.GetQuery(`SELECT * FROM users WHERE role = 'artist'`)
@@ -178,7 +177,7 @@ async function GetApplies() {
 module.exports = {
     Setup,
     GetSongs, songs,
-    GetArtists, artists,
+    GetArtists,
     AddUser, Promote,
     UserExists, IsAdmin,
     GetUserID, GetPassByID, GetRole,

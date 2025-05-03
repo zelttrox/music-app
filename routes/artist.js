@@ -8,10 +8,11 @@ const router = express.Router()
 
 
 // Set the browse page song parameter
-router.param("artist_name", function (request, response, next, artist_name) {
-    const artists = database.artists
+router.param("artist_name", async function (request, response, next, artist_name) {
+    var artists = await database.GetArtists()
     if (!artists) return response.send("Couldn't find artist")
-    request.artist = artists[artist_name]
+    request.artist = artists.find((artist) => artist.artist_name == artist_name)
+    if (!request.artist) return response.send("Artist not found")
     next()
 })
 
@@ -22,8 +23,7 @@ router.get("/", function (request, response) {
 
 // Set route using artist name parameter
 router.route("/:artist_name").get( function(request, response) {
-    console.log(request.artist_name)
-    response.send(`Artist: ${request.artist.artist_name} by ${request.artist_artist_name}`)
+    response.send(`Artist: ${request.artist.artist_name}`)
 })
 
 
