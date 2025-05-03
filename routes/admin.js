@@ -10,6 +10,7 @@ const router = express.Router()
 // TODO: Handle user/guest visit
 // GET request handler
 router.get("/", async function (request, response) {
+    if (user.data.role[0]["role"] != 'admin') return response.redirect("/")
     database.applies = await database.GetApplies()
     const applies = database.applies
     response.render("admin",  {user: user.data, applies: applies})       
