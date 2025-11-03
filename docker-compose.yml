@@ -8,6 +8,7 @@ services:
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
+      - shared_files:/usr/src/app/uploads
     ports:
       - "3030:3030"
     networks:
@@ -15,10 +16,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_USER=enzo
+      - DB_PASSWORD=1234
+      - DB_NAME=music_db
+      - FILE_STORAGE_PATH=/usr/src/app/uploads
+      - FILE_STORAGE_URL=http://storage/files
 
   db:
     image: mysql:8.0
-    container_name: music_db
+    container_name: music-db
     environment:
       - MYSQL_ROOT_PASSWORD=duh
       - MYSQL_DATABASE=music_db
@@ -34,7 +42,24 @@ services:
       timeout: 5s
       retries: 3
     command: --default-authentication-plugin=mysql_native_password
-    
+    volumes:
+      - db_data:/var/lib/mysql
+
+  cloud:
+    image: nginx:alpine
+    container_name: music-cloud
+    volumes:
+      - shared_files:/usr/share/nginx/html/files
+    ports:
+      - "6060:80"
+    restart: unless-stopped
+    networks:
+      - net
+
+volumes:
+  db_data:
+  shared_files:
+
 networks:
   net:
     driver: bridge
