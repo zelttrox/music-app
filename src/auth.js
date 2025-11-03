@@ -7,7 +7,7 @@ function IsUsernameValid(username) {
 // Check if a provided password is valid using regex
 function IsPasswordValid(password) {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
-    return (regex.test(password) && password.length <= 64 && password.length >= 6) ? true : false
+    return (password.length <= 64 && password.length >= 6) ? true : false
 }
 
 // Generate and return an ID based off user role, username and random

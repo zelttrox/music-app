@@ -11,11 +11,11 @@ async function Setup() {
         await database.Init("songs.sql")
         await database.Init("applies.sql")
 
-        await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
-        await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
-        await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
+        // await AddSong("Nostalgia", "Suki Waterhouse", "./uploads/Nostalgia.mp3")
+        // await AddSong("From The Start", "Laufey", "./uploads/From The Start.mp3")
+        // await AddSong("Sofia", "Clairo", "./uploads/Sofia.mp3")
 
-        await AddUser("a0", "admin0", "0192837465", 'admin')
+        // await AddUser("a0", "admin0", "0192837465", 'admin')
     }
     catch (err) {
         console.error("[DB Controller] Error:", err);
@@ -40,7 +40,9 @@ return new Promise((resolve, reject) => {
 async function Promote(id, artist_name) {
     return new Promise((resolve, reject) => {
         database.Query(`UPDATE users SET role = 'artist' WHERE id = '${id}'`)
-        database.Query(`UPDATE users SET artist_name = '${artist_name}' WHERE id = '${id}'`)
+        var artist_name = database.Query(`SELECT artist_name FROM applies WHERE user_id = '${id})'`)
+        database.Query(`UPDATE users SET artist_name = SELECT artist_name FROM applies WHERE user_id = '${id})' WHERE id = '${id}'`)
+        console.log(`[Auth] User ${artist_name} has been promoted to artist`)
         resolve()
     })
 }

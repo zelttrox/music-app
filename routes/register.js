@@ -15,7 +15,7 @@ router.get("/", function (request, response) {
 
 // POST request handler
 router.post("/", async function (request, response) {
-    const user_exists = await database.UserExists(request.body.username)
+    const user_exists = await database.UserExists(request.body.userwname)
     if (auth.IsUsernameValid(request.body.username) && auth.IsPasswordValid(request.body.password) && user_exists == false) {
         console.log("[Auth] User", request.body.username, "is valid, attempting to add to database..")
         try {
@@ -30,6 +30,7 @@ router.post("/", async function (request, response) {
     }
     else {
         console.log(`[Auth] Error while registering: ${request.body.username} is not valid.`)
+        console.log(`[Auth] UsernameValid:${auth.IsUsernameValid(request.body.username)} PasswdValid:${auth.IsPasswordValid(request.body.password)} UserExists:${user_exists}`)
     }
 })
 

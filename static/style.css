@@ -108,10 +108,10 @@ footer {
 }
   
 .song-item {
-  padding: 10px;
+  padding: 12px 14px;
   background-color: var(--container-color);
   border: 1px solid var(--accent-color-low);
-  border-radius: 5px;
+  border-radius: 6px;
 
 }
 
@@ -233,4 +233,47 @@ footer {
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   cursor: pointer;
+}
+
+/* Two-column table layout for admin entries */
+.two-col {
+  display: grid;
+  grid-template-columns: 130px 1fr; /* label column fixed, value flexible */
+  gap: 6px 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.two-col .row {
+  display: contents; /* let grid place children */
+}
+
+.col-label {
+  text-align: left;
+  color: #cfcfcf;
+  font-weight: 700;
+  padding: 6px 0;
+}
+
+.col-value {
+  text-align: left; /* values aligned left and will wrap */
+  color: white;
+  font-weight: 700;
+  padding: 6px 0;
+  word-break: break-word;
+  overflow-wrap: anywhere; /* allow long words/URLs to wrap */
+  white-space: normal; /* ensure wrapping */
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 720px) {
+  .two-col {
+    grid-template-columns: 1fr; /* single column */
+  }
+  .col-value {
+    text-align: left; /* left-align when stacked */
+  }
+  .col-label {
+    opacity: 0.95;
+  }
 }

@@ -11,26 +11,65 @@
   <main>
     <% if (user.role[0]["role"] === 'admin') { %>
     <h1>Admin panel</h1>
+    <a href="/"><button class="btn-primary" type="submit">Go back</button></a>
+    <br>
+    <br>
     <% applies.forEach(function(apply) { %>
-        <div clas="song-item">
-            <p class="text"> Apply request n°<%= apply.number %> </p>
-            <p class="text"> User: <%= apply.username %> </p>
-            <p class="text"> User ID: <%= apply.user_id %> </p>
-            <br>
-            <p class="text"> Artist name: <%= apply.artist_name %> </p>
-            <p class="text"> Email: <%= apply.pro_mail %> </p>
-            <p class="text"> Music label: <%= apply.label %> </p>
-            <p class="text"> Tunecore account: <%= apply.tunecore %> </p>
-            <p class="text"> Copyrights: <%= apply.copyrights %> </p>
-            <br>
-            <form action="/admin/accept" method="POST">
-              <input type="hidden" name="apply_id" value="<%= apply.user_id %>">
-              <button class="btn-primary" type="submit">Accept</button>
-            </form>
-            <form action="/admin/deny" method="POST">
-              <input type="hidden" name="apply_id" value="<%= apply.user_id %>, <%= apply.artist_name %>">
-              <button class="btn-primary" type="submit">Deny</button>
-            </form>
+        <div class="song-item">
+            <p class="text" style="color: rgb(174, 104, 255)"> Apply request n°<%= apply.number %> </p>
+
+            <div class="two-col">
+              <div class="row">
+                <div class="col-label">User</div>
+                <div class="col-value"><%= apply.username %></div>
+              </div>
+
+              <div class="row">
+                <div class="col-label">User ID</div>
+                <div class="col-value"><%= apply.user_id %></div>
+              </div>
+
+              <div class="row">
+                <div class="col-label">Artist name</div>
+                <div class="col-value"><%= apply.artist_name %></div>
+              </div>
+
+              <div class="row">
+                <div class="col-label"></div>
+                <div class="col-value"><%=  %></div>
+              </div>
+
+              <div class="row">
+                <div class="col-label">Email</div>
+                <div class="col-value"><%= apply.pro_mail %></div>
+              </div>
+
+              <div class="row">
+                <div class="col-label">Music label</div>
+                <div class="col-value"><%= apply.label %></div>
+              </div>
+
+              <div class="row">
+                <div class="col-label">Tunecore account</div>
+                <div class="col-value"><%= apply.tunecore %></div>
+              </div>
+
+              <div class="row">
+                <div class="col-label">Copyrights</div>
+                <div class="col-value"><%= apply.copyrights %></div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px; display:flex; gap:8px;">
+              <form action="/admin/accept" method="POST">
+                <input type="hidden" name="apply_id" value="<%= apply.user_id %>">
+                <button class="btn-primary" type="submit">Accept</button>
+              </form>
+              <form action="/admin/deny" method="POST">
+                <input type="hidden" name="apply_id" value="<%= apply.user_id %>, <%= apply.artist_name %>">
+                <button class="btn-primary" type="submit">Deny</button>
+              </form>
+            </div>
         </div>
     <% }) %>
     <% } %>
