@@ -17,6 +17,12 @@
     <form action="/profile/logout" method="POST">
         <button type="submit" class="btn-primary">Log out</button>
     </form>
+    <p class="song-text"> test </p>
+    <% if (user.role[0]["role"] === 'artist') { %>
+      <% console.log("is artist") %>
+      <h1> Artist panel </h1>
+      <p class="song-text"> <% artist_name %> </p>
+    <% } %>
   </main>
 
   <footer>

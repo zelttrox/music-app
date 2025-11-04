@@ -37,14 +37,17 @@ return new Promise((resolve, reject) => {
 )}
 
 // Promote a user to artist
-async function Promote(id, artist_name) {
-    return new Promise((resolve, reject) => {
-        database.Query(`UPDATE users SET role = 'artist' WHERE id = '${id}'`)
-        var artist_name = database.Query(`SELECT artist_name FROM applies WHERE user_id = '${id})'`)
-        database.Query(`UPDATE users SET artist_name = SELECT artist_name FROM applies WHERE user_id = '${id})' WHERE id = '${id}'`)
+async function Promote(id) {
+    try {
+        await database.Query("UPDATE users SET role = ? WHERE id = ?", 'artist', id)
+        await database.Query("UPDATE users SET artist_name = (SELECT artist_name FROM applies WHERE user_id = ?) WHERE id = ?", id, id)
+        const rows = await database.GetQuery(`SELECT artist_name FROM users WHERE id = '${id}'`)
+        const artist_name = (rows && rows[0]) ? rows[0].artist_name : id
         console.log(`[Auth] User ${artist_name} has been promoted to artist`)
-        resolve()
-    })
+    }
+    catch (err) {
+        console.error("[DB] Promote error:", err)
+    }
 }
 
 // Check if a user exists in the users table
@@ -100,6 +103,16 @@ async function GetRole(id) {
     }
     catch(error) {
         console.log("[DB] Error while getting user role:", error)
+    }
+}
+
+// Return the artist name of a user using it's ID
+async function GetArtistNameByID(id) {
+    try {
+    return await database.GetQuery(`SELECT artist_name FROM users WHERE id = '${id}'`)
+    }
+    catch(error) {
+        console.log("[DB] Error while getting artist name:", error)
     }
 }
 
@@ -184,6 +197,6 @@ module.exports = {
     UserExists, IsAdmin,
     GetUserID, GetPassByID, GetRole,
     AddApply, RemoveApply,
-    GetArtistName,
+    GetArtistName, GetArtistNameByID,
     GetApplies, applies
 }
